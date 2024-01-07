@@ -2,7 +2,7 @@ import Cactus from "./Cactus.js";
 
 export default class CactiController {
   CACTUS_INTERVAL_MIN = 500;
-  CACTUS_INTERVAL_MAX = 2000;
+  CACTUS_INTERVAL_MAX = 1325;
 
   nextCactusInterval = null;
   cacti = [];
@@ -68,7 +68,6 @@ export default class CactiController {
   collideWith(sprite) {
     return this.cacti.some((cactus) => cactus.collideWith(sprite));
   }
-
   reset() {
     this.cacti = [];
   }

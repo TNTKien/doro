@@ -1,3 +1,4 @@
+import CactiController from "./CactiController.js";
 export default class Player {
   WALK_ANIMATION_TIMER = 200;
   walkAnimationTimer = this.WALK_ANIMATION_TIMER;
@@ -25,6 +26,13 @@ export default class Player {
     this.standingStillImage = new Image();
     this.standingStillImage.src = "images/standing_still.png";
     this.image = this.standingStillImage;
+
+    this.dedImage = new Image();
+    this.dedImage.src = "images/ded.png";
+
+    this.jumpImage = new Image();
+    this.jumpImage.src = "images/jump.png";
+    
 
     const dinoRunImage1 = new Image();
     dinoRunImage1.src = "images/dino_run1.png";
@@ -74,7 +82,7 @@ export default class Player {
     this.run(gameSpeed, frameTimeDelta);
 
     if (this.jumpInProgress) {
-      this.image = this.standingStillImage;
+      this.image = this.jumpImage;
     }
 
     this.jump(frameTimeDelta);
@@ -105,6 +113,10 @@ export default class Player {
         this.jumpInProgress = false;
       }
     }
+  }
+
+  ded() {
+    this.image = this.dedImage;
   }
 
   run(gameSpeed, frameTimeDelta) {

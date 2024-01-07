@@ -20,9 +20,10 @@ const GROUND_HEIGHT = 24;
 const GROUND_AND_CACTUS_SPEED = 0.5;
 
 const CACTI_CONFIG = [
-  { width: 48 / 1.5, height: 100 / 1.5, image: "images/cactus_1.png" },
-  { width: 98 / 1.5, height: 100 / 1.5, image: "images/cactus_2.png" },
-  { width: 68 / 1.5, height: 70 / 1.5, image: "images/cactus_3.png" },
+  { width: 91 / 1.5, height: 100 / 1.5, image: "images/cactus_1.png" },
+  { width: 107 / 1.5, height: 100 / 1.5, image: "images/cactus_2.png" },
+  { width: 95 / 1.5, height: 100 / 1.5, image: "images/cactus_3.png" },
+  { width: 93 / 1.5, height: 100 / 1.5, image: "images/cactus_4.png" },
 ];
 
 //Game Objects
@@ -119,12 +120,15 @@ function getScaleRatio() {
 }
 
 function showGameOver() {
-  const fontSize = 70 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
+  const fontSize = 50 * scaleRatio;
+  ctx.font = `${fontSize}px 'Press Start 2P'`;
   ctx.fillStyle = "grey";
-  const x = canvas.width / 4.5;
+  const text = "GAME OVER";
+  const textWidth = ctx.measureText(text).width;
+
+  const x = (canvas.width - textWidth) / 2;
   const y = canvas.height / 2;
-  ctx.fillText("GAME OVER", x, y);
+  ctx.fillText(text, x, y);
 }
 
 function setupGameReset() {
@@ -149,12 +153,15 @@ function reset() {
 }
 
 function showStartGameText() {
-  const fontSize = 40 * scaleRatio;
-  ctx.font = `${fontSize}px Verdana`;
+  const fontSize = 20 * scaleRatio;
+  ctx.font = `${fontSize}px 'Press Start 2P'`;
   ctx.fillStyle = "grey";
-  const x = canvas.width / 14;
+  const text = "TAP SCREEN OR PRESS SPACE TO START";
+  const textWidth = ctx.measureText(text).width;
+
+  const x = (canvas.width - textWidth) / 2;
   const y = canvas.height / 2;
-  ctx.fillText("Tap Screen or Press Space To Start", x, y);
+  ctx.fillText(text, x, y);
 }
 
 function updateGameSpeed(frameTimeDelta) {
@@ -187,6 +194,7 @@ function gameLoop(currentTime) {
   }
 
   if (!gameOver && cactiController.collideWith(player)) {
+    player.ded();
     gameOver = true;
     setupGameReset();
     score.setHighScore();
